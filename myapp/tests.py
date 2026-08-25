@@ -7,7 +7,8 @@ orders = [
     {'item': 'spaghetti', 'item_quantity': 2},
     {'item': 'burger', 'item_quantity': 1}, 
     {'item': 'salad', 'item_quantity': 4}, 
-    {'item': 'pie', 'item_quantity': 3}
+    {'item': 'pie', 'item_quantity': 3},
+    {'item': 'ice cream', 'item_quantity': 5}
 ]
 
 @tag('OrderList')
@@ -38,7 +39,7 @@ class OrderListTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertRegex(
             str(response.data), 
-            r"^{'count': 4, 'next': None, 'previous': 'http://127.0.0.1:8000/api/orders', 'results': \[{'id': 4, 'date_time': '\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}Z', 'order_items': \[{'id': 4, 'item': 'pie', 'item_quantity': 3}\]}\]}$"
+            r"^{'count': 5, 'next': None, 'previous': 'http://testserver/api/orders', 'results': \[{'id': 2, 'date_time': '\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}Z', 'order_items': \[{'id': 2, 'item': 'burger', 'item_quantity': 1}\]}, {'id': 1, 'date_time': '\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}Z', 'order_items': \[{'id': 1, 'item': 'spaghetti', 'item_quantity': 2}\]}\]}$"
         )
 
 @tag('OrderCreate')
