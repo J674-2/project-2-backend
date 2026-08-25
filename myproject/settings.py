@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 if 'IN_PRODUCTION' in os.environ:
-    SECRET_KEY = os.environ['IN_PRODUCTION']
+    SECRET_KEY = os.environ['SECRET_KEY']
 else:
     SECRET_KEY = SECRET_KEY
 
