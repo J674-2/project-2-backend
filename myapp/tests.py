@@ -21,7 +21,7 @@ class OrderListTests(APITestCase):
     def test_get_first_page_orders(self):
         # Tests that the first page of orders is correctly returned, when there are previous orders.
         order_obj = Order.objects.create()
-        OrderItem.objects.create(order=order_obj, item=orders[0].item, item_quantity=orders[0].item_quantity)
+        OrderItem.objects.create(order=order_obj, item=orders[0]['item'], item_quantity=orders[0]['item_quantity'])
         response = self.client.get('/api/orders', query_params={'page': 1})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertRegex(
