@@ -1,6 +1,7 @@
 from rest_framework.test import APITestCase 
 from rest_framework import status
 from .models import Order, OrderItem
+from django.test import tag
 
 orders = [
     {'item': 'spaghetti', 'item_quantity': 2},
@@ -9,6 +10,7 @@ orders = [
     {'item': 'pie', 'item_quantity': 3}
 ]
 
+@tag('OrderList')
 class OrderListTests(APITestCase):
     def test_get_no_orders(self):
         # Tests that the first page of orders is correctly returned, when there are no previous orders.
@@ -39,6 +41,7 @@ class OrderListTests(APITestCase):
             r"^{'count': 4, 'next': None, 'previous': 'http://127.0.0.1:8000/api/orders', 'results': \[{'id': 4, 'date_time': '\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}Z', 'order_items': \[{'id': 4, 'item': 'pie', 'item_quantity': 3}\]}\]}$"
         )
 
+@tag('OrderCreate')
 class OrderCreateTests(APITestCase):
     def test_no_order_created_when_item_quantity_less_than_one(self):
         # Tests that an order is not created, when an item quantity has a value below one. 
