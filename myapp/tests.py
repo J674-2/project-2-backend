@@ -1,7 +1,7 @@
 from rest_framework.test import APITestCase 
 from rest_framework import status
 from .models import Order, OrderItem
-from django.test import tag
+from django.test import tag, TestCase
 
 orders = [
     {'item': 'spaghetti', 'item_quantity': 2},
@@ -93,6 +93,11 @@ class OrderCreateTests(APITestCase):
         self.assertEqual(response_2.status_code, status.HTTP_200_OK)
         self.assertRegex(str(response_2.data), r"^{'count': 1, 'next': None, 'previous': None, 'results': \[{'id': 1, 'date_time': '\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}Z', 'order_items': \[{'id': 1, 'item': 'spaghetti', 'item_quantity': 5}\]}\]}$")
 
+@tag('HealthCheck')
+class HealthCheckTests(TestCase):
+    def test_health_check_ok(self):
+        response = self.client.get('/api/health')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 
         
