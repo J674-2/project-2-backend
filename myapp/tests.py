@@ -33,7 +33,7 @@ class OrderListTests(APITestCase):
         # Tests that the second page of orders is correctly returned, when there are previous orders. 
         for order in orders:
             order_obj = Order.objects.create()
-            OrderItem.objects.create(order=order_obj, item=order.item, item_quantity=order.item_quantity)
+            OrderItem.objects.create(order=order_obj, item=order['item'], item_quantity=order['item_quantity'])
         response = self.client.get('/api/orders', query_params={'page': 2})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertRegex(
