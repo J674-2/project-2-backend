@@ -91,7 +91,7 @@ class OrderCreateTests(APITestCase):
         self.assertEqual(response_1.status_code, status.HTTP_201_CREATED)
         self.assertRegex(str(response_1.data), r"^{'id': 1, 'date_time': '\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}Z', 'order_items': \[{'id': 1, 'item': 'spaghetti', 'item_quantity': 5}\]}$")
                         
-        response_2 = self.client.get('api/orders', query_params={'page': 1})
+        response_2 = self.client.get('/api/orders', query_params={'page': 1})
         self.assertEqual(response_2.status_code, status.HTTP_200_OK)
         self.assertRegex(str(response_2.data), r"^{'count': 1, 'next': None, 'previous': None, 'results': \[{'id': 1, 'date_time': '\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}Z', 'order_items': \[{'id': 1, 'item': 'spaghetti', 'item_quantity': 5}\]}\]}$")
 
