@@ -2,6 +2,7 @@ from rest_framework.test import APITestCase
 from rest_framework import status
 from .models import Order, OrderItem
 from django.test import tag, TestCase
+import json
 
 orders = [
     {'item': 'spaghetti', 'item_quantity': 2},
@@ -48,7 +49,7 @@ class OrderCreateTests(APITestCase):
         # Tests that an order is not created, when an item quantity has a value below one. 
         response_1 = self.client.post('/api/orders', data={'order_items': [{'item': 'spaghetti', 'item_quantity': 0}]}, content_type='application/json')
         self.assertEqual(response_1.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertEqual(response_1.data, {'order_items': [{'item_quantity': ['Ensure this value is greater than or equal to 1.']}]})
+        self.assertEqual(json.loads(response_1.content), {'order_items': {'0': {'item_quantity': ['Ensure this value is greater than or equal to 1.']}}})
 
         response_2 = self.client.get('api/orders', query_params={'page': 1})
         self.assertEqual(response_2.status_code, status.HTTP_200_OK)
