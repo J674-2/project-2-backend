@@ -57,7 +57,7 @@ class OrderCreateTests(APITestCase):
 
     def test_no_order_created_when_item_quantity_more_than_six(self):
         # Tests that an order is not created, when an item quantity has a value over six. 
-        response_1 = self.client.post('api/orders', data={'order_items': [{'item': 'spaghetti', 'item_quantity': 7}]}, content_type='application/json')
+        response_1 = self.client.post('/api/orders', data={'order_items': [{'item': 'spaghetti', 'item_quantity': 7}]}, content_type='application/json')
         self.assertEqual(response_1.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(response_1.data, {"order_items": [{"item_quantity": ["Ensure this value is less than or equal to 6."]}]})
         
