@@ -87,7 +87,7 @@ class OrderCreateTests(APITestCase):
 
     def test_order_created_when_data_valid(self):
         # Tests that an order is created, when the request's data is valid. 
-        response_1 = self.client.post('api/orders', data={'order_items': [{'item': 'spaghetti', 'item_quantity': 5}]}, content_type='application/json')
+        response_1 = self.client.post('/api/orders', data={'order_items': [{'item': 'spaghetti', 'item_quantity': 5}]}, content_type='application/json')
         self.assertEqual(response_1.status_code, status.HTTP_201_CREATED)
         self.assertRegex(str(response_1.data), r"^{'id': 1, 'date_time': '\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}Z', 'order_items': \[{'id': 1, 'item': 'spaghetti', 'item_quantity': 5}\]}$")
                         
