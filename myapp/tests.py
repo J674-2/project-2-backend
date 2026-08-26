@@ -51,7 +51,7 @@ class OrderCreateTests(APITestCase):
         self.assertEqual(response_1.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(json.loads(response_1.content), {'order_items': {'0': {'item_quantity': ['Ensure this value is greater than or equal to 1.']}}})
 
-        response_2 = self.client.get('api/orders', query_params={'page': 1})
+        response_2 = self.client.get('/api/orders', query_params={'page': 1})
         self.assertEqual(response_2.status_code, status.HTTP_200_OK)
         self.assertEqual(response_2.data, {'count': 0, 'next': None, 'previous': None, 'results': []})
 
