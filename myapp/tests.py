@@ -77,7 +77,7 @@ class OrderCreateTests(APITestCase):
 
     def test_no_order_created_when_item_repeated(self):
         # Tests that an order is not created, when an item is repeated in the request's data. 
-        response_1 = self.client.post('api/orders', data={'order_items': [{'item': 'spaghetti', 'item_quantity': 5}, {'item': 'spaghetti', 'item_quantity': 3}]}, content_type='application/json')
+        response_1 = self.client.post('/api/orders', data={'order_items': [{'item': 'spaghetti', 'item_quantity': 5}, {'item': 'spaghetti', 'item_quantity': 3}]}, content_type='application/json')
         self.assertEqual(response_1.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(response_1.data, {'order_items': {'non_field_errors': ['Duplicate order items were found.']}})
                         
