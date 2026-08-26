@@ -67,7 +67,7 @@ class OrderCreateTests(APITestCase):
 
     def test_no_order_created_when_item_not_in_choices(self):
         # Tests that an order is not created, when an item is not one of the specified choices. 
-        response_1 = self.client.post('api/orders', data={'order_items': [{'item': 'carrots', 'item_quantity': 5}]}, content_type='application/json')
+        response_1 = self.client.post('/api/orders', data={'order_items': [{'item': 'carrots', 'item_quantity': 5}]}, content_type='application/json')
         self.assertEqual(response_1.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(response_1.data, {'order_items': [{'item': ['\'carrots\' is not a valid choice.']}]})
                 
