@@ -8,8 +8,10 @@ import os
 
 from pathlib import Path
 
-if 'IN_PRODUCTION' not in os.environ:
-    from .dev_env import SECRET_KEY
+try:
+    from .dev_env import SECRET_KEY, IN_DEVELOPMENT
+except:
+    pass
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,15 +21,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-if 'IN_PRODUCTION' in os.environ:
-    SECRET_KEY = os.environ['SECRET_KEY']
-else:
+if IN_DEVELOPMENT == True:
     SECRET_KEY = SECRET_KEY
+else:
+    SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if IN_DEVELOPMENT == True:
+    DEBUG = True
+else: 
+    DEBUG = False
 
-ALLOWED_HOSTS = []
+if IN_DEVELOPMENT == True: 
+    ALLOWED_HOSTS = []
+else: 
+    ALLOWED_HOSTS = ['portfolioapp1.com']
 
 
 # Application definition
