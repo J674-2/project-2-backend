@@ -36,7 +36,7 @@ else:
 if IN_DEVELOPMENT == True: 
     ALLOWED_HOSTS = []
 else: 
-    ALLOWED_HOSTS = ['portfolioapp1.com']
+    ALLOWED_HOSTS = ['portfolioapp1.com', json.loads(os.environ['HOSTS_SECRET'])['HOSTS_SECRET']]
 
 
 # Application definition
