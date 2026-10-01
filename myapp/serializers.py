@@ -19,6 +19,11 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     order_items = OrderItemSerializer(many=True)
+    def validate_order_items(self, value):
+        try: value[0]
+        except:
+            raise serializers.ValidationError('Order creation requires order items.')
+        return value
     class Meta:
         fields = ['id', 'date_time', 'order_items']
         model = Order
