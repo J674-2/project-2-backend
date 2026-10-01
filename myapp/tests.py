@@ -65,6 +65,16 @@ class OrderCreateTests(APITestCase):
         self.assertEqual(response_2.status_code, status.HTTP_200_OK)
         self.assertEqual(response_2.data, {'count': 0, 'next': None, 'previous': None, 'results': []})
 
+    def test_no_order_created_when_item_quantity_field_missing(self):
+        # Tests that an order is not created, when the item_quantity field is not included in the request.
+        response_1 = self.client.post('/api/orders', data={'order_items': [{'item': 'spaghetti'}]}, content_type='application/json')
+        self.assertEqual(response_1.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(json.loads(response_1.content), {'order_items': {'0': {'item_quantity': ['This field is required.']}}})
+    
+        response_2 = self.client.get('/api/orders', query_params={'page': 1})
+        self.assertEqual(response_2.status_code, status.HTTP_200_OK)
+        self.assertEqual(response_2.data, {'count': 0, 'next': None, 'previous': None, 'results': []})
+
     def test_no_order_created_when_item_quantity_less_than_one(self):
         # Tests that an order is not created, when an item quantity has a value below one. 
         response_1 = self.client.post('/api/orders', data={'order_items': [{'item': 'spaghetti', 'item_quantity': 0}]}, content_type='application/json')
