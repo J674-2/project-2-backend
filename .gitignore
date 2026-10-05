@@ -1,3 +1,7 @@
 # Ignore development environment variables. 
 
 /myproject/dev_env.py
+
+# Ignore sqlite database
+
+/db.sqlite3
