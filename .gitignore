@@ -9,3 +9,4 @@
 # Ignore pycache 
 
 /myapp/__pycache__
+/myproject/__pycache__
