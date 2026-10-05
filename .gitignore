@@ -5,3 +5,7 @@
 # Ignore sqlite database
 
 /db.sqlite3
+
+# Ignore pycache 
+
+/myapp/__pycache__
