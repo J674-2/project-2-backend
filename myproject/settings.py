@@ -9,10 +9,9 @@ import os
 
 from pathlib import Path
 
-try:
-    from .dev_env import SECRET_KEY, IN_DEVELOPMENT
-except:
-    pass
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,18 +21,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-if IN_DEVELOPMENT == True:
-    SECRET_KEY = SECRET_KEY
+if 'IN_DEVELOPMENT' in os.environ:
+    SECRET_KEY = os.environ['SECRET_KEY']
 else:
     SECRET_KEY = json.loads(os.environ['DJANGO_SECRET_KEY'])['DJANGO_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if IN_DEVELOPMENT == True:
+if 'IN_DEVELOPMENT' in os.environ:
     DEBUG = True
 else: 
     DEBUG = False
 
-if IN_DEVELOPMENT == True: 
+if 'IN_DEVELOPMENT' in os.environ: 
     ALLOWED_HOSTS = []
 else: 
     ALLOWED_HOSTS = ['portfolioapp1.com', json.loads(os.environ['HOSTS_SECRET'])['HOSTS_SECRET']]
@@ -168,7 +167,7 @@ REST_FRAMEWORK = {
 
 # django-cors-headers settings
 
-if IN_DEVELOPMENT == True:
+if 'IN_DEVELOPMENT' in os.environ:
     CORS_ALLOWED_ORIGINS = ['http://localhost:5173',]
 else:
     CORS_ALLOWED_ORIGINS = [json.loads(os.environ['FRONTEND_ORIGIN'])['FRONTEND_ORIGIN'],]
