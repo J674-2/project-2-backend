@@ -170,4 +170,4 @@ REST_FRAMEWORK = {
 if 'IN_DEVELOPMENT' in os.environ:
     CORS_ALLOWED_ORIGINS = ['http://localhost:5173',]
 else:
-    CORS_ALLOWED_ORIGINS = [json.loads(os.environ['FRONTEND_ORIGIN'])['FRONTEND_ORIGIN'],]
+    CORS_ALLOWED_ORIGINS = [os.environ['FRONTEND_ORIGIN'],]
