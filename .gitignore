@@ -9,4 +9,5 @@
 # Ignore pycache 
 
 /myapp/__pycache__
+/myapp/migrations/__pycache__
 /myproject/__pycache__
