@@ -176,3 +176,4 @@ else:
 # CSRF settings
 
 CSRF_COOKIE_SAMESITE = 'Strict'
+CSRF_COOKIE_SECURE = True
