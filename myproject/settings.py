@@ -171,3 +171,8 @@ if 'IN_DEVELOPMENT' in os.environ:
     CORS_ALLOWED_ORIGINS = ['http://localhost:5173',]
 else:
     CORS_ALLOWED_ORIGINS = [os.environ['FRONTEND_ORIGIN'],]
+
+
+# CSRF settings
+
+CSRF_COOKIE_SAMESITE = 'Strict'
