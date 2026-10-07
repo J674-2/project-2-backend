@@ -177,3 +177,8 @@ else:
 
 CSRF_COOKIE_SAMESITE = 'Strict'
 CSRF_COOKIE_SECURE = True
+
+
+# Session cookie settings
+
+SESSION_COOKIE_SAMESITE = 'Strict'
