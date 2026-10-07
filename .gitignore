@@ -11,3 +11,9 @@
 /myapp/__pycache__
 /myapp/migrations/__pycache__
 /myproject/__pycache__
+
+# Ignore Elastic Beanstalk Files
+
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
