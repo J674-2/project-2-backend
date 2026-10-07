@@ -182,3 +182,4 @@ CSRF_COOKIE_SECURE = True
 # Session cookie settings
 
 SESSION_COOKIE_SAMESITE = 'Strict'
+SESSION_COOKIE_SECURE = True
